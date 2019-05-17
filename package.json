@@ -1,0 +1,10 @@
+{
+ "name": "shakeit",
+ "version": "1.0.0",
+ "dependencies": {
+ "express": "^4.7.1",
+ "method-override": "^2.1.2",
+ "mysql": "^2.10.2",
+ "body-parser": "^1.5.1"
+ }
+}
