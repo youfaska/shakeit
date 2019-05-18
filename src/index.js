@@ -4,7 +4,7 @@ const morgan = require("morgan");
 
 
 //middler morgan
-app.use(morgan("dev"));
+app.use(morgan("dev")); //more edetails in log console
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 

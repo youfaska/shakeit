@@ -1,4 +1,27 @@
-var http = require('http');
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+
+
+//middler morgan
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+//configurar el puerto
+app.set('port',3000);
+app.set('json spaces',2);
+
+//routers
+app.use(require('./src/routers/index.js'));
+app.use(require('./src/routers/debates.js'));
+
+
+//arrancado el servidor
+app.listen(app.get('port'), () => {
+    console.log("El servidor está inicializado en el puerto 3000");
+});
+/**var http = require('http');
 var mysql = require('mysql');
 var console_debug = "";
 const express = require("express");
@@ -125,7 +148,7 @@ app.get('/debate', function (req, res) {
 app.listen(3000, () => {
  console.log("El servidor está inicializado en el puerto 3000");
 });
-
+**/
 
 // var server = http.createServer(function(req, res) {
 // 	var con = mysql.createConnection({
