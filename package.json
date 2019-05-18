@@ -1,10 +1,18 @@
 {
  "name": "shakeit",
  "version": "1.0.0",
+ "main": "index.js",
+ "scripts": {
+  "dev": "nodemon src/index.js"
+ },
  "dependencies": {
- "express": "^4.7.1",
- "method-override": "^2.1.2",
- "mysql": "^2.10.2",
- "body-parser": "^1.5.1"
+  "body-parser": "^1.5.1",
+  "express": "^4.7.1",
+  "method-override": "^2.1.2",
+  "morgan": "^1.9.1",
+  "mysql": "^2.10.2"
+ },
+ "devDependencies": {
+  "nodemon": "^1.19.0"
  }
 }
