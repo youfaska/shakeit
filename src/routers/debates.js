@@ -1,18 +1,15 @@
-const   {Router} = require("express");
-const router = Router();
+const   {Router} 	= require("express");
+const 	router 		= Router();
+const 	debates 	= require('../debates.json');
 
-const debates = require('../debates.json');
-console.log(debates);
-
+const 	underscore 	= require('underscore');
 //routes
 router.get('/debates', function (req, res) {
-	let response = {
-		"title": "mi primer debate", 
-		"description" : "mi descripcion del debate 1"
-	}
 	res.json(debates);
  });
 
+
+ //create debate
  router.post('/debates', function (req, res) {
 	 const {title, description, ok_vote, ko_vote, created_date} = req.body;
 	 if (title && description && (ok_vote ||  ko_vote) && created_date){
@@ -23,10 +20,44 @@ router.get('/debates', function (req, res) {
 		debates.push(newDebate);
 		res.json(debates);
 	 }else{
-		console.log("algun parametro esta vacio o mal formado");
+		console.log("Some params is empty or wrong");
 		res.send("Worng request");
 	 }
 	
  });
+
+ //update
+ router.put('/debates/:id', function (req, res) {
+	const {title, description, ok_vote, ko_vote, created_date} = req.body;
+	const {id }= req.params;
+	if (title && description && (ok_vote ||  ko_vote) && created_date){
+		underscore.each(debates, (debate, i) => {
+			if (debate.id == id){
+				debate.title = title;
+				debate.description = description;
+				debate.ok_vote = ok_vote;
+				debate.ko_vote = ko_vote;
+				debate.created_date = created_date;
+			}
+		});
+	   res.json(debates);
+	}else{
+	   console.log("Some params is empty or wrong");
+	   res.status(500).json({"error" : "All the filds are required"});
+	}
+   
+});
+
+
+//remove debate
+ router.delete('/debates/:id', function (req, res) {
+	const {id }= req.params;
+	underscore.each(debates, (debate, i) => {
+		if (debate.id == id){
+			debates.splice(i,1);
+		}
+	});
+	res.json(debates);
+	});
 
  module.exports= router;
