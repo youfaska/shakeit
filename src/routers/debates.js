@@ -3,8 +3,28 @@ const 	router 		= Router();
 const 	debates 	= require('../debates.json');
 
 const 	underscore 	= require('underscore');
+var mysql = require('mysql');
+/*
+var con = mysql.createConnection({
+  host: "localhost:3306", //sh-europe2716 , 11.78.0.27 ,  localhost:3306
+  user: "qgmsenxs_elena",
+  password: "CuentaElena5",
+  database: "qgmsenxs_shakeit"
+});*/
+
+
+
 //routes
-router.get('/debates', function (req, res) {
+router.get('/debates', function (req, res,next) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	/*con.connect(function(err) {
+		if (err) throw err;
+		con.query("SELECT * FROM debate", function (err, result, fields) {
+		  if (err) throw err;
+		  res.json(result);
+		});
+	  });*/
 	res.json(debates);
  });
 
@@ -43,7 +63,7 @@ router.get('/debates', function (req, res) {
 	   res.json(debates);
 	}else{
 	   console.log("Some params is empty or wrong");
-	   res.status(500).json({"error" : "All the filds are required"});
+	   res.status(500).json({"error" : "All the fields are required"});
 	}
    
 });
