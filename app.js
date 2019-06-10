@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 //configurar el puerto
-app.set('port',3000);
+//app.set('port',3000);
 app.set('json spaces',2);
 
 //routers
@@ -18,8 +18,11 @@ app.use(require('./src/routers/debates.js'));
 
 
 //arrancado el servidor
-app.listen(app.get('port'), () => {
-    console.log("El servidor está inicializado en el puerto 3000");
+
+const PORT = process.env.PORT || 3000;
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`App listening on port ${PORT}`);
+  console.log('Press Ctrl+C to quit.');
 });
 /**var http = require('http');
 var mysql = require('mysql');
@@ -173,3 +176,5 @@ app.listen(3000, () => {
 
 
 //server.listen();
+
+module.exports = app
